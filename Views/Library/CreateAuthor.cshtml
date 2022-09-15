@@ -1,0 +1,27 @@
+@model LibraryWebProject.Models.AuthorModel
+@{
+    ViewData["Title"] = "ActionName";
+}
+
+<form asp-action="CreateAuthor" style="background-color: gray; border-radius: 20px;" enctype="multipart/form-data">
+    <div class="mx-5" style="padding: 40px;">
+        <h3 class="text-center" style="">Create Author</h3>
+        <div class="form-group" >
+            <label asp-for="AuthorName" class="text-white"></label>
+            <input type="text" asp-for="AuthorName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorSurname" class="text-white"></label>
+            <input type="text" asp-for="AuthorSurname" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorBirthDate" class="text-white"></label>
+            <input type="text" asp-for="AuthorBirthDate" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorDeathDate" class="text-white"></label>
+            <input type="text" asp-for="AuthorDeathDate" class="form-control" placeholder="Write - if not">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

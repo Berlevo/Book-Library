@@ -1,0 +1,55 @@
+@model LibraryWebProject.Models.AuthorModel
+@using LibraryWebProject.Data
+@inject LibraryContext _Context
+@{
+    ViewData["Title"] = "EditBook";
+}
+
+<form asp-action="EditBook" style="background-color: gray; border-radius: 20px;">
+
+    <h3 class="text-center" style="">Book Edit</h3>
+
+    @* <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().BookID"> *@
+
+    <div class="mx-5" style="padding: 80px;">
+        <div class="form-group">
+            <label asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().BookName" class="text-white"></label>
+            <input type="text" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().BookName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().PageNumber" class="text-white"></label>
+            <input type="text" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().PageNumber" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().Price" class="text-white"></label>
+            <input type="text" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().Price" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().PublishDate" class="text-white"></label>
+            <input type="text" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().PublishDate" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().Publisher" class="text-white"></label>
+            <input type="text" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().Publisher" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().BookInformation" class="text-white"></label>
+            <input type="text" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().BookInformation" class="form-control">
+        </div>
+        <div class="form-group">
+            @foreach (var photo in Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().BookPhotos)
+            {
+                <img src="~/BookPhotoFile/@photo.PhotoName" class="mx-2" style="max-width: 120px;">
+                <a asp-action="PhotoDelete" asp-route-PhotoId="@photo.PhotoID" class="btn btn-white"><i
+                    class="fa-solid fa-xmark " style="color: #e03131;"></i></a>
+            }
+        </div>
+        <form asp-action="PhotoAdd" enctype="multipart/form-data">
+            <label>Add Photo</label>
+            <input type="hidden" asp-for="@Model.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault().BookID">
+            <input type="file" asp-for="@Model.BookPhotoFiles" class="form-control-file" multiple>
+        </form>
+        <button style="margin-top: 20px;" type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

@@ -1,0 +1,32 @@
+@model LibraryWebProject.Models.AuthorModel
+@{
+    ViewData["Title"] = "AuthorDetail";
+}
+<a class="btn btn-warning" asp-controller="Library" asp-action="AuthorEdit" asp-route-id="@Model.AuthorID" style="margin-bottom: 10px;">Author Edit</a>
+<a class="btn btn-danger" asp-controller="Library" asp-action="AuthorDelete" asp-route-id="@Model.AuthorID" style="margin-bottom: 10px;">Author Delete</a>
+
+<div class="jumbotron">
+    <div class="form-group">
+        <div>@Html.DisplayNameFor(x => x.AuthorName)</div>
+        <div>@Model.AuthorName</div>
+    </div>
+    <div class="form-group">
+        <div>@Html.DisplayNameFor(x => x.AuthorSurname)</div>
+        <div>@Model.AuthorSurname</div>
+    </div>
+    <div class="form-group">
+        <div>@Html.DisplayNameFor(x => x.AuthorBirthDate)</div>
+        <div>@Model.AuthorBirthDate</div>
+    </div>
+    <div class="form-group">
+        <div>@Html.DisplayNameFor(x => x.AuthorDeathDate)</div>
+        <div>@Model.AuthorDeathDate</div>
+    </div>
+    <div class="form-group">
+        <div>@Html.DisplayNameFor(x => x.AuthorBooks)</div>
+        @foreach (var books in Model.AuthorBooks.Where(x => x.isDeleted == false))
+        {
+            <div>@books.BookName</div>
+        }
+    </div>
+</div>

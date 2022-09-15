@@ -1,0 +1,35 @@
+@model IEnumerable<LibraryWebProject.Models.AuthorModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container cover border" style="height: 80vh; border-width: 3px !important;">
+        <div class="row">
+            @foreach (var author in Model.Where(x => x.isDeleted == false))
+            {
+                <div class="card-deck col-md-4" style="margin: 20px; max-width: 190px;">
+                    <div class="card">
+                        @if(author.AuthorBooks.Where(x => x.isDeleted == false).FirstOrDefault() != null){
+                            <img src="BookPhotoFile/@author.AuthorBooks.Where(x => x.AuthorID == author.AuthorID).FirstOrDefault().BookPhotos.FirstOrDefault().PhotoName"style="max-width: 120px; align-self: center;">
+                            
+                        }else{
+                            @* <img src="BookPhotoFile/@author.AuthorBooks.Where(x => x.AuthorID == author.AuthorID).FirstOrDefault().BookPhotos.FirstOrDefault().PhotoName"style="max-width: 120px; align-self: center;"> *@
+                        }
+                        @* <img src="BookPhotoFile/@author.AuthorBooks.Where(x => x.AuthorID == author.AuthorID).FirstOrDefault().BookPhotos.FirstOrDefault().PhotoName"style="max-width: 120px; align-self: center;"> *@
+                        <div class="card-body bg-dark text-white">
+                            Author: @author.AuthorName
+                        </div>
+                        <a class="btn btn-success" asp-controller="Library" asp-action="AuthorDetail"
+                        asp-route-id="@author.AuthorID">Author Detail</a>
+                        <a class="btn btn-warning" asp-controller="Library" asp-action="BookDetail"
+                        asp-route-id="@author.AuthorID">Book Detail</a>
+                        @* <a class="btn btn-success" asp-area="" asp-controller="Library" asp-action="CreateBook"
+                            asp-route-AuthorId="@book.AuthorID">Create Book</a> *@
+                        <a class="btn btn-danger" asp-area="" asp-controller="Library" asp-action="DeleteBook"
+                        asp-route-id="@author.AuthorID">Delete Book</a>
+                    </div>
+                </div>
+                @* <a asp-action="CreateBook" asp-controller="Library" asp-route-Auhorid="@author.AuthorID"></a> *@
+            }
+        </div>
+</div>

@@ -1,0 +1,27 @@
+@model IEnumerable<LibraryWebProject.Models.BookModel>
+@{
+    ViewData["Title"] = "DeleteBook";
+}
+
+<table class="table table-dark table-hover table-striped">
+    <thead>
+        <th>@Html.DisplayNameFor(x => x.BookName)</th>
+        <th>@Html.DisplayNameFor(x => x.BookInformation)</th>
+        <th>@Html.DisplayNameFor(x => x.BookPhotos)</th>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Where(x => x.isDeleted == false))
+        {
+            <tr>
+                <td>@book.BookName</td>
+                <td>@book.BookInformation</td>
+                <td><img src = "~/BookPhotoFile/@book.BookPhotos.FirstOrDefault().PhotoName" class="mx-2" style="max-width: 120px;"></td>
+                <td>
+                    <form asp-action="Delete" class="w-100" asp-route-id = "@book.BookID">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

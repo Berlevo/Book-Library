@@ -1,0 +1,53 @@
+@model LibraryWebProject.Models.BookModel
+@using LibraryWebProject.Data
+@inject LibraryContext _Context
+@{
+    ViewData["Title"] = "CreateBook";
+}
+
+<a asp-for=""></a>
+
+<form asp-action="CreateBook" style="background-color: gray; border-radius: 20px;" enctype="multipart/form-data">
+    
+    <div class="mx-5" style="padding: 40px;">
+        <h3 class="text-center" style="">Create Book</h3>
+        <label class="text-white">Select Author</label>
+        <select asp-for="AuthorID" class="form-control mb-4">
+            @foreach (var authors in _Context.Authors)
+            {
+                <option value="@authors.AuthorID">@authors.AuthorName</option>
+            }
+        </select>
+
+        <div class="form-group">
+            <label asp-for="BookName" class="text-white"></label>
+            <input type="text" asp-for="BookName" class="form-control" placeholder="Book Name...">
+        </div>
+        <div class="form-group">
+            <label asp-for="PageNumber" class="text-white"></label>
+            <input type="text" asp-for="PageNumber" class="form-control" placeholder="Book Page Number...">
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="text-white"></label>
+            <input type="text" asp-for="Price" class="form-control" placeholder="Book Price...">
+        </div>
+        <div class="form-group">
+            <label asp-for="PublishDate" class="text-white"></label>
+            <input type="text" asp-for="PublishDate" class="form-control"
+                placeholder="Book Publish Date... (Ex: 12.08.2022)">
+        </div>
+        <div class="form-group">
+            <label asp-for="Publisher" class="text-white"></label>
+            <input type="text" asp-for="Publisher" class="form-control" placeholder="Book Publisher...">
+        </div>
+        <div class="form-group">
+            <label asp-for="BookInformation" class="text-white"></label>
+            <input type="text" asp-for="BookInformation" class="form-control" placeholder="Book Information...">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Author.BookPhotoFiles" class="text-white"></label>
+            <input type="file" asp-for="@Model.Author.BookPhotoFiles" class="form-control-file" multiple>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
